@@ -22,7 +22,7 @@ library(ggplot2) #Gráficos
 ```
 
 ```{r apertura}
-setwd("C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional")
+setwd("\\\\10.10.96.5/Home_VDI$/s.delapaz.2017/Documents")
 getwd()
 list.files()
 dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
@@ -46,8 +46,8 @@ Outcome |        Variable respuesta
 
 ```{r particiones}
 n_total = dim(dataSet)[1]
-n_train = 0.1 * n_total # el 60% de la muestra se usa para entrenar los modelos
-n_test = 0.1 * n_total #el 20% para test
+n_train = 0.1 * n_total # el 10% de la muestra se usa para entrenar los modelos
+n_test = 0.1 * n_total #el 10% para test
 n_validacion = n_total - n_train - n_test # el resto para la validación
 
 indices_total = seq(1:n_total)
