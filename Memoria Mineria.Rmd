@@ -12,7 +12,7 @@ output: bookdown::gitbook
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# 'Introducción
+# Introducción
 
 Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la basse de datos:
 
@@ -21,8 +21,11 @@ Cargamos las librerias que vamos a necesitar para esta práctica
 library(ggplot2) #Gráficos
 ```
 
-```{r resumen}
-summary(cars)
+```{r apertura}
+setwd("C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional")
+getwd()
+list.files()
+dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
 ```
 Las variables y su explicación aparecen en la siguiente lista:
 * Pregnancies: Número de embarazos
@@ -41,17 +44,34 @@ Outcome |        Variable respuesta
 
 ## Particiones
 
+```{r particiones}
+n_total = dim(dataSet)[1]
+n_train = 0.6 * n_total # el 60% de la muestra se usa para entrenar los modelos
+n_test = 0.2 * n_total #el 20% para test
+n_validacion = n_total - n_train - n_test # el resto para la validación
+
+indices_total = seq(1:n_total)
+set.seed(12832)
+indices_train = sample(indices_total,n_train)
+indices_test = sample(indices_total[-indices_train],n_test)
+indices_validation = indices_total[-c(indices_train,indices_test)]
+
+dataSet_train = dataSet[indices_train,]
+dataSet_test = dataSet[indices_test,]
+dataSet_validation = dataSet[indices_validation,]
+```
+
 # Objetivos (del negocio)
 
 # Datos
 
 # Preprocesado de datos.
 
-## DA. Exploratory Data Analysis.
+## DAA. Exploratory Data Analysis.
 
 
 ```{r EDA}
-attach(dataSet) 
+attach(dataSet_train) 
 summary(age)
 hist(age)
 table(age)
@@ -62,9 +82,9 @@ table(age>0,campaign)
 chisq.test(table(age,campaign))
 ##Nos interesa si es mayor o menor que 0.05
 mean(dataSet[campaign==0,]$age)
-ggplot(data=dataSet, aes(age)) +
-  geom_density()+
-  ggtitle("Función de densidad de la variabel age")
+#ggplot(data=dataSet, aes(age)) +
+ # geom_density()+
+  #ggtitle("Función de densidad de la variabel age")
 
 
 
@@ -82,8 +102,22 @@ Estudiamos la correlación entre las variabels explicativas y la variable respue
 Realizamos un contraste de hipótesis (t.test) para comprobar si hay diferencias significativas entre los dos puntos de interés:
 
 ```{r TEST_AGE}
-as.numeric(y)
-t.test(age-y)
+#as.numeric(y)
+#t.test(age-y)
 ```
 
 Se puede concluir que la variable *Age es ...
+
+## Transformación de variables 
+Aparentemente hay valores o que  corresponden a mujeres que no se les tomó esta medida
+
+```{r age_transformation}
+hist(age)
+age_cat= cut(age,c(-1,0.1,20,40,1000),labels=c("NS/NC","Bajo","Medio","Alto"))
+table(age_cat,y)
+chisq.test(table(age_cat,y))
+
+```
+Hemos transformado la variable, categorizándola en 4 niveles. La nueva variable resulta ser estadísticamente significativa. Es decir, es una variable que debemos teener en cuaneta e la construcción de los modelos de Machine Learning.
+
+
