@@ -30,7 +30,7 @@ Las variables y su explicación aparecen en la siguiente lista:
 *
 *
 *
-* Outcome: variabel respuesta, 1 tiene diabetes, 0 , no tiene diabetes
+* Outcome: variable respuesta, 1 tiene diabetes, 0 , no tiene diabetes
 
 
 Nombre | Descripción
