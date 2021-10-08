@@ -38,6 +38,9 @@ Nombre | Descripción
 Pregnances |        nsbajasbsbbc
 Outcome |        Variable respuesta
 
+
+## Particiones
+
 # Objetivos (del negocio)
 
 # Datos
