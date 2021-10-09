@@ -32,8 +32,8 @@
   
 
 <link rel="next" href="objetivos-del-negocio.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -58,6 +58,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -167,25 +168,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introducción" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introducción</h1>
-<p>Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la basse de datos:</p>
+<p>Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la base de datos:</p>
 <p>Cargamos las librerias que vamos a necesitar para esta práctica</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#Gráficos</span></span></code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.5</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introducción.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional&quot;</span>)</span>
-<span id="cb3-2"><a href="introducción.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introducción.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;__MACOSX&quot;                 &quot;bank-additional&quot;         
-## [3] &quot;bank-additional-full.csv&quot; &quot;bank-additional.csv&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introducción.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dataSet<span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;bank-additional-full.csv&quot;</span>,<span class="at">header=</span><span class="cn">TRUE</span>,<span class="at">sep =</span> <span class="st">&quot;;&quot;</span>,<span class="at">dec =</span> <span class="st">&quot;.&quot;</span>)</span></code></pre></div>
-<p>Las variables y su explicación aparecen en la siguiente lista:
-* Pregnancies: Número de embarazos
-* Glucose: Nivel de glucosa
-<em>
-</em>
-<em>
-</em> Outcome: variable respuesta, 1 tiene diabetes, 0 , no tiene diabetes</p>
+<p>Las variables y su explicación aparecen en la siguiente tabla:</p>
 <table>
+<colgroup>
+<col width="57%" />
+<col width="42%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Nombre</th>
@@ -194,31 +185,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td>Pregnances</td>
-<td>nsbajasbsbbc</td>
+<td><strong>1</strong> AGE</td>
+<td>Edad del cliente contactado por el banco. Variable numérica entera.</td>
 </tr>
 <tr class="even">
-<td>Outcome</td>
-<td>Variable respuesta</td>
+<td><strong>2</strong> JOB</td>
+<td>Profesión realizada por el cliente contactado (en la sección “datos” veremos los valores posible de la variable). Variable categórica.</td>
+</tr>
+<tr class="odd">
+<td><strong>3</strong> MARITAL</td>
+<td>Estado civil del cliente contactado (soltero, casado , divorciado o viudo(se engloban en la misma variable con el nombre de “divorciado”) o desconocido). Variable categórica.</td>
+</tr>
+<tr class="even">
+<td><strong>4</strong> EDUCATION</td>
+<td>Título de estudios superior que posee el cliente contactado (3 niveles básicos de enseñanza, escuela secundaria, formación profesional, estudios universitarios o sin estudios.) Variable categórica.</td>
+</tr>
+<tr class="odd">
+<td><strong>5</strong> DEFAULT</td>
+<td>Si el cliente tiene o no un crèdito en inclumplimiento (sí, no , desconocido). Variable categórica.</td>
+</tr>
+<tr class="even">
+<td><strong>6</strong> HOUSING</td>
+<td>Si el cliente tiene un préstamo para pagar su vivienda (sí, no , desconocido). Variable categórica.</td>
+</tr>
+<tr class="odd">
+<td><strong>7</strong> LOAN</td>
+<td>Si el cliente tiene o no un préstamo personal (sí, no, desconocido). Variable categórica.</td>
+</tr>
+<tr class="even">
+<td><strong>8</strong> CONTACT</td>
+<td>Modo de contacto del banco con el cliente(móvil,teléfono fijo). Variable categórica</td>
+</tr>
+<tr class="odd">
+<td><strong>9</strong> MONTH</td>
+<td>Último mes del año en el que el banco contactó con el cliente. Variable categórica.</td>
+</tr>
+<tr class="even">
+<td><strong>10</strong> DAY_OF_WEEK</td>
+<td>Último día de la semana en el que en banco contactó con el cliente. Variable categórica.</td>
+</tr>
+<tr class="odd">
+<td><strong>11</strong> DURATION</td>
+<td>Duración del último contacto del banco con el cliente en segundos. Variable numérica.</td>
+</tr>
+<tr class="even">
+<td><strong>12</strong> CAMPAIGN</td>
+<td>Número de contactos realizados al cliente durante la campaña actual hasta el momento. Variable numérica entera.</td>
+</tr>
+<tr class="odd">
+<td><strong>13</strong> PDAYS</td>
+<td>Número de días desde que el cliente fue contactado por última vez en una campaña anterior. Variable numérica entera.</td>
+</tr>
+<tr class="even">
+<td><strong>14</strong> PREVIOUS</td>
+<td>Número de contactos realizados previos a la campaña actual para cada cliente. Variable numérica entera.</td>
+</tr>
+<tr class="odd">
+<td><strong>15</strong> POUTCOME</td>
+<td>Resultado de la campaña de marketing anterior (éxito, fracaso, inexistente). Variable categórica</td>
+</tr>
+<tr class="even">
+<td><strong>16</strong> EMP.VAR.RATE</td>
+<td>Tasa de variación de empleo en un periodo de tres meses. Variable numérica.</td>
+</tr>
+<tr class="odd">
+<td><strong>17</strong> CONS.PRIDE.IDX</td>
+<td>Índice de precios al consumidor mensualmente. Variable numérica.</td>
+</tr>
+<tr class="even">
+<td><strong>18</strong> CONS.CONF.IDX</td>
+<td>Índice de confianza del consumidor mensualmente. Variable numérica.</td>
+</tr>
+<tr class="odd">
+<td><strong>19</strong> EURIBOR3M</td>
+<td>Tasa de Euríbor a 3 meses medido diariamente. Variable numérica.</td>
+</tr>
+<tr class="even">
+<td><strong>20</strong> NR.EMPLOYED</td>
+<td>Cómo ha variado el número de empleados del banco en un periodo de 3 meses. Variable numérica entera.</td>
 </tr>
 </tbody>
 </table>
+<p>Las siete primeras variables están relacionadas con información personal de cada cliente, las siguientes cuatro con el contacto en la campaña actual y las demás son variables relacionadas con otros aspectos como el contexto social y económico actual y las campañas pasadas.</p>
 <div id="particiones" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Particiones</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introducción.html#cb8-1" aria-hidden="true" tabindex="-1"></a>n_total <span class="ot">=</span> <span class="fu">dim</span>(dataSet)[<span class="dv">1</span>]</span>
-<span id="cb8-2"><a href="introducción.html#cb8-2" aria-hidden="true" tabindex="-1"></a>n_train <span class="ot">=</span> <span class="fl">0.6</span> <span class="sc">*</span> n_total <span class="co"># el 60% de la muestra se usa para entrenar los modelos</span></span>
-<span id="cb8-3"><a href="introducción.html#cb8-3" aria-hidden="true" tabindex="-1"></a>n_test <span class="ot">=</span> <span class="fl">0.2</span> <span class="sc">*</span> n_total <span class="co">#el 20% para test</span></span>
-<span id="cb8-4"><a href="introducción.html#cb8-4" aria-hidden="true" tabindex="-1"></a>n_validacion <span class="ot">=</span> n_total <span class="sc">-</span> n_train <span class="sc">-</span> n_test <span class="co"># el resto para la validación</span></span>
-<span id="cb8-5"><a href="introducción.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="introducción.html#cb8-6" aria-hidden="true" tabindex="-1"></a>indices_total <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n_total)</span>
-<span id="cb8-7"><a href="introducción.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12832</span>)</span>
-<span id="cb8-8"><a href="introducción.html#cb8-8" aria-hidden="true" tabindex="-1"></a>indices_train <span class="ot">=</span> <span class="fu">sample</span>(indices_total,n_train)</span>
-<span id="cb8-9"><a href="introducción.html#cb8-9" aria-hidden="true" tabindex="-1"></a>indices_test <span class="ot">=</span> <span class="fu">sample</span>(indices_total[<span class="sc">-</span>indices_train],n_test)</span>
-<span id="cb8-10"><a href="introducción.html#cb8-10" aria-hidden="true" tabindex="-1"></a>indices_validation <span class="ot">=</span> indices_total[<span class="sc">-</span><span class="fu">c</span>(indices_train,indices_test)]</span>
-<span id="cb8-11"><a href="introducción.html#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="introducción.html#cb8-12" aria-hidden="true" tabindex="-1"></a>dataSet_train <span class="ot">=</span> dataSet[indices_train,]</span>
-<span id="cb8-13"><a href="introducción.html#cb8-13" aria-hidden="true" tabindex="-1"></a>dataSet_test <span class="ot">=</span> dataSet[indices_test,]</span>
-<span id="cb8-14"><a href="introducción.html#cb8-14" aria-hidden="true" tabindex="-1"></a>dataSet_validation <span class="ot">=</span> dataSet[indices_validation,]</span></code></pre></div>
+<p>Dividimos nuestro conjunto de datos en 3 subconjuntos. Los datos de entrenamiento(el 10% de los datos totales) que serán los que utilicemos para tratar y aplicar las técnicas de ciencia de datos para recoger información. Los datos de prueba(otro 10% de los datos totales) serán los datos donde probaremos que nuestras técnicas funcionan y nuestro modelo es válido, cambiando así lo realizado hasta entonces si no funciona como se espera. Por último, el mayoritario conjunto de datos de validación mostrarán finalmente lo realizado a lo largo del trabajo en el final del mismo.</p>
 </div>
 </div>
             </section>

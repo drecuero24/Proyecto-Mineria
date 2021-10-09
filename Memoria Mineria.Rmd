@@ -4,9 +4,9 @@ author: "Daniel/  Sergio"
 date: "1/10/2021"
 output: bookdown::gitbook
 ---
-```{r}
 
-```
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -14,37 +14,52 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introducción
 
-Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la basse de datos:
+Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la base de datos:
 
 Cargamos las librerias que vamos a necesitar para esta práctica
 ```{r librerias}
 library(ggplot2) #Gráficos
 ```
 
-```{r apertura}
-setwd("\\\\10.10.96.5/Home_VDI$/s.delapaz.2017/Documents")
-getwd()
-list.files()
+```{r apertura, echo=FALSE}
+setwd("C:/Users/s.delapaz.2017/Downloads/Proyecto-Mineria")
+#getwd()
+#list.files()
 dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
 ```
-Las variables y su explicación aparecen en la siguiente lista:
-* Pregnancies: Número de embarazos
-* Glucose: Nivel de glucosa
-*
-*
-*
-* Outcome: variable respuesta, 1 tiene diabetes, 0 , no tiene diabetes
+Las variables y su explicación aparecen en la siguiente tabla:
 
 
 Nombre | Descripción
 ----------------|------------
-Pregnances |        nsbajasbsbbc
-Outcome |        Variable respuesta
+**1** AGE |     Edad del cliente contactado por el banco. Variable numérica entera.
+**2** JOB |     Profesión realizada por el cliente contactado (en la sección "datos" veremos los valores posible de la variable). Variable categórica.
+**3** MARITAL | Estado civil del cliente contactado (soltero, casado , divorciado o viudo(se engloban en la misma variable con el nombre de "divorciado") o desconocido). Variable categórica.
+**4** EDUCATION | Título de estudios superior que posee el cliente contactado (3 niveles básicos de enseñanza, escuela secundaria, formación profesional, estudios universitarios o sin estudios.) Variable categórica.
+**5** DEFAULT | Si el cliente tiene o no un crèdito en inclumplimiento (sí, no , desconocido). Variable categórica.
+**6** HOUSING | Si el cliente tiene un préstamo para pagar su vivienda (sí, no , desconocido). Variable categórica.
+**7** LOAN | Si el cliente tiene o no un préstamo personal (sí, no, desconocido). Variable categórica.
+**8** CONTACT | Modo de contacto del banco con el cliente(móvil,teléfono fijo). Variable categórica
+**9** MONTH | Último mes del año en el que el banco contactó con el cliente. Variable categórica.
+**10** DAY_OF_WEEK | Último día de la semana en el que en banco contactó con el cliente. Variable categórica.
+**11** DURATION | Duración del último contacto del banco con el cliente en segundos. Variable numérica.
+**12** CAMPAIGN | Número de contactos realizados al cliente durante la campaña actual hasta el momento. Variable numérica entera.
+**13** PDAYS | Número de días desde que el cliente fue contactado por última vez en una campaña anterior. Variable numérica entera.
+**14** PREVIOUS | Número de contactos realizados previos a la campaña actual para cada cliente. Variable numérica entera.
+**15** POUTCOME | Resultado de la campaña de marketing anterior (éxito, fracaso, inexistente). Variable categórica
+**16** EMP.VAR.RATE | Tasa de variación de empleo en un periodo de tres meses. Variable numérica.
+**17** CONS.PRIDE.IDX | Índice de precios al consumidor mensualmente. Variable numérica.
+**18** CONS.CONF.IDX | Índice de confianza del consumidor mensualmente. Variable numérica.
+**19** EURIBOR3M | Tasa de Euríbor a 3 meses medido diariamente. Variable numérica.
+**20** NR.EMPLOYED | Cómo ha variado el número de empleados del banco en un periodo de 3 meses. Variable numérica entera.
 
+Las siete primeras variables están relacionadas con información personal de cada cliente, las siguientes cuatro con el contacto en la campaña actual y las demás son variables relacionadas con otros aspectos como el contexto social y económico actual y las campañas pasadas.
 
 ## Particiones
 
-```{r particiones}
+Dividimos nuestro conjunto de datos en 3 subconjuntos. Los datos de entrenamiento(el 10% de los datos totales) que serán los que utilicemos para tratar y aplicar las técnicas de ciencia de datos para recoger información. Los datos de prueba(otro 10% de los datos totales) serán los datos donde probaremos que nuestras técnicas funcionan y nuestro modelo es válido, cambiando así lo realizado hasta entonces si no funciona como se espera. Por último, el mayoritario conjunto de datos de validación mostrarán finalmente lo realizado a lo largo del trabajo en el final del mismo.
+
+```{r particiones, echo=FALSE}
 n_total = dim(dataSet)[1]
 n_train = 0.1 * n_total # el 10% de la muestra se usa para entrenar los modelos
 n_test = 0.1 * n_total #el 10% para test
@@ -63,12 +78,23 @@ dataSet_validation = dataSet[indices_validation,]
 
 # Objetivos (del negocio)
 
+Los datos de la base a tratar recogen multitud de información mediante las variables descritas anteriormente. Los datos pertenecen a la base de datos de un banco que está realizando campañas de marketing a sus clientes recogiendo así la información sobre ellos con el objetivo final de poder predecir si el cliente contactado abrirá un depósito a plazo en el banco o no lo hará. Por lo tanto, esa será nuestra variable respuesta "y", una variable de tipo binaria que tomará los valores de "sí" si el cliente abre un depósito a plazo en el banco, o "no" si no lo hace.
+
 # Datos
 
 # Preprocesado de datos.
 
 ## DAA. Exploratory Data Analysis.
 
+```{r eliminarColumna}
+attach(dataSet_train)
+duration = NULL
+summary(duration)
+```
+```{r tiposDeDatos}
+ sapply(dataSet_train, class)
+ sapply(dataSet_train, mode)
+```
 
 ```{r EDA}
 attach(dataSet_train) 
