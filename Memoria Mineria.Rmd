@@ -120,9 +120,6 @@ mean(dataSet[campaign==0,]$age)
 
 ```
 
-```{r prueba}
-hist(age)
-```
 
 ## Correlación de las variables
 Estudiamos la correlación entre las variabels explicativas y la variable respuesta
@@ -140,6 +137,21 @@ Realizamos un contraste de hipótesis (t.test) para comprobar si hay diferencias
 ```
 
 Se puede concluir que la variable *Age es ...
+
+
+### Duration
+```{r CorrDur, echo=FALSE}
+attach(dataSet_train)
+hist(dataSet_train$duration) ##Aquí deberia dejar poenr solo duration
+ggplot(data=dataSet, aes(x=duration, fill=y))+
+  geom_density(alpha=0.3)
+summary(dataSet_train$duration,dataSet_train$y)
+chisq.test(table(dataSet_train$duration,dataSet_train$y))
+
+```
+
+
+
 
 ## Transformación de variables 
 Aparentemente hay valores o que  corresponden a mujeres que no se les tomó esta medida
