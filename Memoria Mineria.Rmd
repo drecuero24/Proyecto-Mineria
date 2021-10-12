@@ -14,27 +14,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introducción
 
-Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la base de datos:
+Los datos que se van a tratar en este informe están relacionados con campañas de marketing directo, más concretamente a través de llamadas telefónicas, que una institución bancaria portuguesa realizó años atrás.
 
-Cargamos las librerias que vamos a necesitar para esta práctica
-```{r librerias}
-library(ggplot2) #Gráficos
-```
+#####La base de datos fue publicada el 14 de Febrero de 2012. Hay que tener en cuenta que............ NO SE Si EXPLICAR LAS CUATRO BASES DE DATOS QUE NOS DIERON Hubo más de un contacto con ciertos clientes
 
-```{r apertura, echo=FALSE}
-setwd("C:/Users/s.delapaz.2017/Downloads/Proyecto-Mineria")
-#getwd()
-#list.files()
-dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
-```
-Las variables y su explicación aparecen en la siguiente tabla:
+#####NO SE SI PONER ES TO AQUí El objetivo de este informe es crear un modelo capaz de predecir si el cliente se suscribirá o no al producto que oferecía el banco, un depoósito a plazo bancario. La variable encargada de recoger esta información, es decir, la variable respuesta, es la variable 'y'.
 
+A continuación, damos nombre a las variables y una breve explicación de la información que aportan, incluyendo la tipología de dicha variable:
 
 Nombre | Descripción
 ----------------|------------
 **1** AGE |     Edad del cliente contactado por el banco. Variable numérica entera.
 **2** JOB |     Profesión realizada por el cliente contactado (en la sección "datos" veremos los valores posible de la variable). Variable categórica.
-**3** MARITAL | Estado civil del cliente contactado (soltero, casado , divorciado o viudo(se engloban en la misma variable con el nombre de "divorciado") o desconocido). Variable categórica.
+**3** MARITAL | Estado civil del cliente contactado (soltero, casado , divorciado o viudo(se engloban en la misma variable con el nombre de "divorciado") o desconocido). Variable categórica. 
 **4** EDUCATION | Título de estudios superior que posee el cliente contactado (3 niveles básicos de enseñanza, escuela secundaria, formación profesional, estudios universitarios o sin estudios.) Variable categórica.
 **5** DEFAULT | Si el cliente tiene o no un crèdito en inclumplimiento (sí, no , desconocido). Variable categórica.
 **6** HOUSING | Si el cliente tiene un préstamo para pagar su vivienda (sí, no , desconocido). Variable categórica.
@@ -57,7 +49,8 @@ Las siete primeras variables están relacionadas con información personal de ca
 
 ## Particiones
 
-Dividimos nuestro conjunto de datos en 3 subconjuntos. Los datos de entrenamiento(el 10% de los datos totales) que serán los que utilicemos para tratar y aplicar las técnicas de ciencia de datos para recoger información. Los datos de prueba(otro 10% de los datos totales) serán los datos donde probaremos que nuestras técnicas funcionan y nuestro modelo es válido, cambiando así lo realizado hasta entonces si no funciona como se espera. Por último, el mayoritario conjunto de datos de validación mostrarán finalmente lo realizado a lo largo del trabajo en el final del mismo.
+En este apartado, dividimos el conjunto de datos en 3 subconjuntos que nos servirán para realizar las tareas posteriores. En primer lugar, los datos de entrenamiento suponen el 10% de los datos totales, cuya finalidad será utilizarlos para tratar y aplicar las técnicas de ciencia de datos con el fin de crear el modelo. Seguidamente, los datos de prueba, otro 10% de los datos totales,  son los datos a través de los cuales se probará que las técnicas empleadas funcionan y el moedlo final es válido. Por último, los datos de validación, el conjunto con mayor cantidad de información, servirán para poder mostrar que todo  el trabajo realizado previamente funciona como debería.
+
 
 ```{r particiones, echo=FALSE}
 n_total = dim(dataSet)[1]
@@ -75,6 +68,17 @@ dataSet_train = dataSet[indices_train,]
 dataSet_test = dataSet[indices_test,]
 dataSet_validation = dataSet[indices_validation,]
 ```
+
+Antes de cerrar esta sección, se carga la base de datos y las librerías que se van a emplear a lo largo del informe:
+```{r apertura, echo=FALSE}
+setwd("C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional")
+dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
+```
+
+```{r librerias}
+library(ggplot2) #Gráficos
+```
+
 
 # Objetivos (del negocio)
 
