@@ -47,6 +47,16 @@ Nombre | Descripción
 
 Las siete primeras variables están relacionadas con información personal de cada cliente, las siguientes cuatro con el contacto en la campaña actual y las demás son variables relacionadas con otros aspectos como el contexto social y económico actual y las campañas pasadas.
 
+Antes de cerrar esta sección, se carga la base de datos y las librerías que se van a emplear a lo largo del informe:
+```{r apertura, echo=FALSE}
+setwd("C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional")
+dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
+```
+
+```{r librerias}
+library(ggplot2) #Gráficos
+```
+
 ## Particiones
 
 En este apartado, dividimos el conjunto de datos en 3 subconjuntos que nos servirán para realizar las tareas posteriores. En primer lugar, los datos de entrenamiento suponen el 10% de los datos totales, cuya finalidad será utilizarlos para tratar y aplicar las técnicas de ciencia de datos con el fin de crear el modelo. Seguidamente, los datos de prueba, otro 10% de los datos totales,  son los datos a través de los cuales se probará que las técnicas empleadas funcionan y el moedlo final es válido. Por último, los datos de validación, el conjunto con mayor cantidad de información, servirán para poder mostrar que todo  el trabajo realizado previamente funciona como debería.
@@ -67,16 +77,6 @@ indices_validation = indices_total[-c(indices_train,indices_test)]
 dataSet_train = dataSet[indices_train,]
 dataSet_test = dataSet[indices_test,]
 dataSet_validation = dataSet[indices_validation,]
-```
-
-Antes de cerrar esta sección, se carga la base de datos y las librerías que se van a emplear a lo largo del informe:
-```{r apertura, echo=FALSE}
-setwd("C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional")
-dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
-```
-
-```{r librerias}
-library(ggplot2) #Gráficos
 ```
 
 
@@ -120,6 +120,9 @@ mean(dataSet[campaign==0,]$age)
 
 ```
 
+```{r prueba}
+hist(age)
+```
 
 ## Correlación de las variables
 Estudiamos la correlación entre las variabels explicativas y la variable respuesta
