@@ -89,6 +89,20 @@ Los datos de la base a tratar recogen multitud de información mediante las vari
 # Preprocesado de datos.
 
 ## DAA. Exploratory Data Analysis.
+```{r scatter, echo=FALSE}
+#library(psych)
+library(psych)
+pairs.panels(dataSet_train[,1:5], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+pairs(dataSet_train[,c(1,11)])
+```
+
+
+
 
 ```{r eliminarColumna}
 attach(dataSet_train)
@@ -164,5 +178,13 @@ chisq.test(table(age_cat,y))
 
 ```
 Hemos transformado la variable, categorizándola en 4 niveles. La nueva variable resulta ser estadísticamente significativa. Es decir, es una variable que debemos teener en cuaneta e la construcción de los modelos de Machine Learning. 
+
+
+```{r }
+```
+
+
+
+
 
 
