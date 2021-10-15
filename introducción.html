@@ -32,8 +32,8 @@
   
 
 <link rel="next" href="objetivos-del-negocio.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -58,7 +58,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -134,14 +133,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html#particiones"><i class="fa fa-check"></i><b>1.1</b> Particiones</a></li>
+<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html#particiones-y-cambio-de-tipo-de-variable"><i class="fa fa-check"></i><b>1.1</b> Particiones y cambio de tipo de variable</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="objetivos-del-negocio.html"><a href="objetivos-del-negocio.html"><i class="fa fa-check"></i><b>2</b> Objetivos (del negocio)</a></li>
 <li class="chapter" data-level="3" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>3</b> Datos</a></li>
 <li class="chapter" data-level="4" data-path="preprocesado-de-datos..html"><a href="preprocesado-de-datos..html"><i class="fa fa-check"></i><b>4</b> Preprocesado de datos.</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="preprocesado-de-datos..html"><a href="preprocesado-de-datos..html#daa.-exploratory-data-analysis."><i class="fa fa-check"></i><b>4.1</b> DAA. Exploratory Data Analysis.</a></li>
-<li class="chapter" data-level="4.2" data-path="preprocesado-de-datos..html"><a href="preprocesado-de-datos..html#correlación-de-las-variables"><i class="fa fa-check"></i><b>4.2</b> Correlación de las variables</a></li>
+<li class="chapter" data-level="4.2" data-path="preprocesado-de-datos..html"><a href="preprocesado-de-datos..html#correlación-de-las-variables"><i class="fa fa-check"></i><b>4.2</b> Correlación de las variables</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="preprocesado-de-datos..html"><a href="preprocesado-de-datos..html#duration"><i class="fa fa-check"></i><b>4.2.1</b> Duration</a></li>
+</ul></li>
 <li class="chapter" data-level="4.3" data-path="preprocesado-de-datos..html"><a href="preprocesado-de-datos..html#transformación-de-variables"><i class="fa fa-check"></i><b>4.3</b> Transformación de variables</a></li>
 </ul></li>
 </ul>
@@ -168,10 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introducción" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introducción</h1>
-<p>Esta es una prueba para crear un análisis de datos básico.Por ejemplo, presentamos un resumen de las variables de la base de datos:</p>
-<p>Cargamos las librerias que vamos a necesitar para esta práctica</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#Gráficos</span></span></code></pre></div>
-<p>Las variables y su explicación aparecen en la siguiente tabla:</p>
+<p>Los datos que se van a tratar en este informe están relacionados con campañas de marketing directo, más concretamente a través de llamadas telefónicas, que una institución bancaria portuguesa realizó años atrás.</p>
+<p>#####La base de datos fue publicada el 14 de Febrero de 2012. Hay que tener en cuenta que………… NO SE Si EXPLICAR LAS CUATRO BASES DE DATOS QUE NOS DIERON Hubo más de un contacto con ciertos clientes</p>
+<p>#####NO SE SI PONER ES TO AQUí El objetivo de este informe es crear un modelo capaz de predecir si el cliente se suscribirá o no al producto que oferecía el banco, un depoósito a plazo bancario. La variable encargada de recoger esta información, es decir, la variable respuesta, es la variable ‘y’.</p>
+<p>A continuación, damos nombre a las variables y una breve explicación de la información que aportan, incluyendo la tipología de dicha variable:</p>
 <table>
 <colgroup>
 <col width="57%" />
@@ -267,9 +269,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Las siete primeras variables están relacionadas con información personal de cada cliente, las siguientes cuatro con el contacto en la campaña actual y las demás son variables relacionadas con otros aspectos como el contexto social y económico actual y las campañas pasadas.</p>
-<div id="particiones" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Particiones</h2>
-<p>Dividimos nuestro conjunto de datos en 3 subconjuntos. Los datos de entrenamiento(el 10% de los datos totales) que serán los que utilicemos para tratar y aplicar las técnicas de ciencia de datos para recoger información. Los datos de prueba(otro 10% de los datos totales) serán los datos donde probaremos que nuestras técnicas funcionan y nuestro modelo es válido, cambiando así lo realizado hasta entonces si no funciona como se espera. Por último, el mayoritario conjunto de datos de validación mostrarán finalmente lo realizado a lo largo del trabajo en el final del mismo.</p>
+<p>Antes de cerrar esta sección, se carga la base de datos y las librerías que se van a emplear a lo largo del informe:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#Gráficos</span></span></code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.5</code></pre>
+<div id="particiones-y-cambio-de-tipo-de-variable" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Particiones y cambio de tipo de variable</h2>
+<p>En este apartado, dividimos el conjunto de datos en 3 subconjuntos que nos servirán para realizar las tareas posteriores. En primer lugar, los datos de entrenamiento suponen el 10% de los datos totales, cuya finalidad será utilizarlos para tratar y aplicar las técnicas de ciencia de datos con el fin de crear el modelo. Seguidamente, los datos de prueba, otro 10% de los datos totales, son los datos a través de los cuales se probará que las técnicas empleadas funcionan y el moedlo final es válido. Por último, los datos de validación, el conjunto con mayor cantidad de información, servirán para poder mostrar que todo el trabajo realizado previamente funciona como debería.</p>
+<p>Aqui cambiamos la variables para faacilitar plots:default porque en ek DAA hemos visto que sería bueno representarla correctamente.
+default: 1NO, 2 yes y unknow 0</p>
 </div>
 </div>
             </section>
