@@ -57,9 +57,23 @@ dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
 library(ggplot2) #Gráficos
 ```
 
-## Particiones
+## Particiones y cambio de tipo de variable
 
 En este apartado, dividimos el conjunto de datos en 3 subconjuntos que nos servirán para realizar las tareas posteriores. En primer lugar, los datos de entrenamiento suponen el 10% de los datos totales, cuya finalidad será utilizarlos para tratar y aplicar las técnicas de ciencia de datos con el fin de crear el modelo. Seguidamente, los datos de prueba, otro 10% de los datos totales,  son los datos a través de los cuales se probará que las técnicas empleadas funcionan y el moedlo final es válido. Por último, los datos de validación, el conjunto con mayor cantidad de información, servirán para poder mostrar que todo  el trabajo realizado previamente funciona como debería.
+
+
+Aqui cambiamos la variable default porque en ek DAA hemos visto que sería bueno representarla correctamente. 1NO, 2 yes y unknow 0
+```{r default, echo=FALSE}
+attach(dataSet)
+def_no=which(default=='no')
+def_si=which(default=='yes')
+def_un=which(default=='unknown')
+dataSet[def_no,5]=1
+dataSet[def_si,5]=2
+dataSet[def_un,5]=0
+```
+
+
 
 
 ```{r particiones, echo=FALSE}
@@ -88,22 +102,97 @@ Los datos de la base a tratar recogen multitud de información mediante las vari
 
 # Preprocesado de datos.
 
+
+
 ## DAA. Exploratory Data Analysis.
-```{r scatter, echo=FALSE}
-#library(psych)
+En esta primera etapa, se va a estudiar posibles relaciones entre las distintas variables para así encontrar aquellas que aporten mayor información en el modelo.
+Primeramente, se hace con las 5 primeras.
+
+```{r scatter1, echo=FALSE}
 library(psych)
+attach(dataSet_train)
+
 pairs.panels(dataSet_train[,1:5], 
              method = "pearson", # correlation method
              hist.col = "#00AFBB",
              density = TRUE,  # show density plots
              ellipses = TRUE # show correlation ellipses
              )
-pairs(dataSet_train[,c(1,11)])
+pairs.panels(dataSet_train[,c(1,5)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(age,default)
+```
+En este primer gráfico se observa cierta importancia de la variable edad sobre el resto.
+En el segundo se ve que los menos de 60 años son mas reacios a dar informacion de si tienen credito personal en incumplimiento o no
+
+
+
+```{r scatter2, echo=FALSE}
+pairs.panels(dataSet_train[,c(1,6,7,8,9)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
 ```
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r scatter3, echo=FALSE}
+pairs.panels(dataSet_train[,c(1,10,11,12,13)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+```
+
+```{r scatter4, echo=FALSE}
+pairs.panels(dataSet_train[,c(1,14,15,16,17)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pairs(dataSet_train[,c(1,11)])
 ```{r eliminarColumna}
 attach(dataSet_train)
 duration = NULL
