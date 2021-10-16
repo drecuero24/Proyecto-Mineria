@@ -63,10 +63,86 @@ En este apartado, dividimos el conjunto de datos en 3 subconjuntos que nos servi
 
 
 Aqui cambiamos la variables para faacilitar plots:default porque en ek DAA hemos visto que sería bueno representarla correctamente.
+job: 0unknow 1admin. 2blue-collar 3entrepreneur 4housemaid 5management 6retired 7self-employed 8services 9student
+      10technician 11unemployed
+marital: 0 unknow 1divorced 2married 3single    
+education: 0unknown 1basic.4y 2.basic.6y 3basic.9y 4high.school 5illiterate 6 professional.course 7university.degree
+      
 default: 1NO, 2 yes y unknow 0
 
-```{r default, echo=FALSE}
+
+```{r variables, echo=FALSE}
 attach(dataSet)
+#job
+job_unk=which(job=='unknown')
+job_adm=which(job=='admin.')
+job_blu=which(job=='blue-collar')
+job_entr=which(job=='entrepreneur')
+job_hou=which(job=='housemaid')
+job_man=which(job=='management')
+job_ret=which(job=='retired')
+job_sel=which(job=='self-employed')
+job_ser=which(job=='services')
+job_stu=which(job=='student')
+job_tec=which(job=='technician')
+job_une=which(job=='unemployed')
+
+dataSet[job_unk,2]=0
+dataSet[job_adm,2]=1
+dataSet[job_blu,2]=2
+dataSet[job_entr,2]=3
+dataSet[job_hou,2]=4
+dataSet[job_man,2]=5
+dataSet[job_ret,2]=6
+dataSet[job_sel,2]=7
+dataSet[job_ser,2]=8
+dataSet[job_stu,2]=9
+dataSet[job_tec,2]=10
+dataSet[job_une,2]=11
+
+
+#marital
+mar_unk=which(marital=='unknown')
+mar_div=which(marital=='divorced')
+mar_mar=which(marital=='married')
+mar_sing=which(marital=='single')
+
+dataSet[mar_unk,3]=0
+dataSet[mar_div,3]=1
+dataSet[mar_mar,3]=2
+dataSet[mar_sing,3]=3
+
+
+#education
+ed_unk=which(education=='unknown')
+ed_bas4=which(education=='basic.4y')
+ed_bas6=which(education=='basic.6y')
+ed_bas9=which(education=='basic.9y')
+ed_hig=which(education=='high.school')
+ed_ili=which(education=='illiterate')
+ed_prof=which(education=='professional.course')
+ed_uni=which(education=='university.degree')
+
+dataSet[ed_unk,4]=0
+dataSet[ed_bas4,4]=1
+dataSet[ed_bas6,4]=2
+dataSet[ed_bas9,4]=3
+dataSet[ed_hig,4]=4
+dataSet[ed_ili,4]=5
+dataSet[ed_prof,4]=6
+dataSet[ed_uni,4]=7
+
+
+dataSet[mar_unk,3]=0
+dataSet[mar_div,3]=1
+dataSet[mar_mar,3]=2
+dataSet[mar_sing,3]=3
+
+
+
+
+
+#default
 def_no=which(default=='no')
 def_si=which(default=='yes')
 def_un=which(default=='unknown')
