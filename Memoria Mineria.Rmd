@@ -67,9 +67,14 @@ job: 0unknow 1admin. 2blue-collar 3entrepreneur 4housemaid 5management 6retired 
       10technician 11unemployed
 marital: 0 unknow 1divorced 2married 3single    
 education: 0unknown 1basic.4y 2.basic.6y 3basic.9y 4high.school 5illiterate 6 professional.course 7university.degree
-      
-default: 1NO, 2 yes y unknow 0
-
+default: 0unknow 1NO, 2 yes
+housing 0 unknow 1no 2 yes
+loan: 0unknow 1NO, 2 yes
+contact: 0cellular 1 telephone
+month: 1jan 2feb 3mar 4apr 5may 6jun 7jul 8aug 9sep 10oct 11nov 12dec
+day_of_week: 1mon 2tue 3wed 4thu 5fri
+poutcome: 1failure 2nonexistent 3success
+y: 1no 2yes
 
 ```{r variables, echo=FALSE}
 attach(dataSet)
@@ -133,22 +138,100 @@ dataSet[ed_prof,4]=6
 dataSet[ed_uni,4]=7
 
 
-dataSet[mar_unk,3]=0
-dataSet[mar_div,3]=1
-dataSet[mar_mar,3]=2
-dataSet[mar_sing,3]=3
-
-
-
-
-
 #default
-def_no=which(default=='no')
-def_si=which(default=='yes')
 def_un=which(default=='unknown')
-dataSet[def_no,5]=1
-dataSet[def_si,5]=2
+def_no=which(default=='no')
+def_yes=which(default=='yes')
+
 dataSet[def_un,5]=0
+dataSet[def_no,5]=1
+dataSet[def_yes,5]=2
+
+
+#housing
+hos_un=which(housing=='unknown')
+hos_no=which(housing=='no')
+hos_yes=which(housing=='yes')
+
+dataSet[hos_un,6]=0
+dataSet[hos_no,6]=1
+dataSet[hos_yes,6]=2
+
+
+#loan
+lo_un=which(loan=='unknown')
+lo_no=which(loan=='no')
+lo_yes=which(loan=='yes')
+
+dataSet[lo_un,7]=0
+dataSet[lo_no,7]=1
+dataSet[lo_yes,7]=2
+
+
+#contact
+con_cel=which(contact=='cellular')
+con_tel=which(contact=='telephone')
+
+dataSet[con_cel,8]=0
+dataSet[con_tel,8]=1
+
+#month
+mon_jan=which(month=='jan')
+mon_feb=which(month=='feb')
+mon_mar=which(month=='mar')
+mon_apr=which(month=='apr')
+mon_may=which(month=='may')
+mon_jun=which(month=='jun')
+mon_jul=which(month=='jul')
+mon_aug=which(month=='aug')
+mon_sep=which(month=='sep')
+mon_oct=which(month=='oct')
+mon_nov=which(month=='nov')
+mon_dec=which(month=='dec')
+
+dataSet[mon_jan,9]=1
+dataSet[mon_feb,9]=2
+dataSet[mon_mar,9]=3
+dataSet[mon_apr,9]=4
+dataSet[mon_may,9]=5
+dataSet[mon_jun,9]=6
+dataSet[mon_jul,9]=7
+dataSet[mon_aug,9]=8
+dataSet[mon_sep,9]=9
+dataSet[mon_oct,9]=10
+dataSet[mon_nov,9]=11
+dataSet[mon_dec,9]=12
+
+
+#day_of_week
+day_mon=which(day_of_week=='mon')
+day_tue=which(day_of_week=='tue')
+day_wed=which(day_of_week=='wed')
+day_thu=which(day_of_week=='thu')
+day_fri=which(day_of_week=='fri')
+
+dataSet[day_mon,10]=1
+dataSet[day_tue,10]=2
+dataSet[day_wed,10]=3
+dataSet[day_thu,10]=4
+dataSet[day_fri,10]=5
+
+
+#poutcome
+pou_fai=which(poutcome=='failure')
+pou_non=which(poutcome=='nonexistent')
+pou_suc=which(poutcome=='success')
+
+dataSet[pou_fai,15]=1
+dataSet[pou_non,15]=2
+dataSet[pou_suc,15]=3
+
+#y
+y_no=which(y=='no')
+y_yes=which(y=='yes')
+
+dataSet[y_no,21]=1
+dataSet[y_yes,21]=2
 ```
 
 
