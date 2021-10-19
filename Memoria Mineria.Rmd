@@ -49,7 +49,7 @@ Las siete primeras variables están relacionadas con información personal de ca
 
 Antes de cerrar esta sección, se carga la base de datos y las librerías que se van a emplear a lo largo del informe:
 ```{r apertura, echo=FALSE}
-setwd("C:/Users/danir/OneDrive/Escritorio/Mineria de datos/bank-additional")
+setwd("C:/Users/s.delapaz.2017/Downloads/Proyecto-Mineria")
 dataSet<- read.csv("bank-additional-full.csv",header=TRUE,sep = ";",dec = ".")
 ```
 
@@ -267,7 +267,7 @@ Los datos de la base a tratar recogen multitud de información mediante las vari
 
 ## DAA. Exploratory Data Analysis.
 En esta primera etapa, se va a estudiar posibles relaciones entre las distintas variables para así encontrar aquellas que aporten mayor información en el modelo.
-Primeramente, se hace con las 5 primeras.
+Primeramente, se hace con las 5 primeras. A su vez, realizamos el plot de las que tengan una correlación mayor que 0,1(en valor absoluto).
 
 ```{r scatter1, echo=FALSE}
 library(psych)
@@ -285,10 +285,14 @@ pairs.panels(dataSet_train[,c(1,5)],
              density = TRUE,  # show density plots
              ellipses = TRUE # show correlation ellipses
              )
+plot(age,marital)
+plot(age,education)
 plot(age,default)
 ```
 En este primer gráfico se observa cierta importancia de la variable edad sobre el resto.
-En el segundo se ve que los menos de 60 años son mas reacios a dar informacion de si tienen credito personal en incumplimiento o no
+En el segundo gráfico, se observa que muy pocos se niegan a dar información sobre su estado civil, pero estos con sobre todo los que tienen entre 40 y 60 años. Se ve que los mayores de 60 prácticamente no están solteros, los menores de tal edad tienen más posibilidades de estar divorciados o viudos.
+En el tercer gráfico, se ve que muy poca gente es analfabeta.Es un dato que muchas más personas de casi todas las edades encuestadas son reaccias a dar, teniendo en cuenta que se llama a pocas personas mayores de 80 años. La educación básica al primer nivel y la secundaria son los estudios que más poseen los mayores de 60. Los menores de 70 tienen mayor posibilidad de tener el nivel de estudios básico al segundo y tercer nivel, así como una formación profesional o título universitario, algo que escasea en los mayores de 70.
+En el último, se ve que los menos de 60 años son mas reaccios a dar informacion de si tienen credito personal en incumplimiento o no. 
 
 
 
@@ -337,32 +341,207 @@ pairs.panels(dataSet_train[,c(1,14,15,16,17)],
 ```
 
 
+```{r scatter5, echo=FALSE}
+pairs.panels(dataSet_train[,c(1,18,19,20)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(age,cons.conf.idx)
+
+```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+```{r age$duration, echo=FALSE}
 pairs(dataSet_train[,c(1,11)])
-```{r eliminarColumna}
-attach(dataSet_train)
-duration = NULL
-summary(duration)
 ```
-```{r tiposDeDatos}
- sapply(dataSet_train, class)
- sapply(dataSet_train, mode)
+```{r age-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(1,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(age,y)
 ```
+
+```{r job-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(2,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(job,y)
+```
+```{r marital-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(3,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(marital,y)
+```
+```{r education-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(4,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(education, y)
+```
+```{r default-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(5,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(default,y)
+```
+```{r housing-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(6,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(housing,y)
+```
+```{r loan-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(7,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(loan, y)
+```
+```{r contact-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(8,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(contact,y)
+```
+```{r month-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(9,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(month,y)
+```
+```{r day_of_week-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(10,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(day_of_week,y)
+```
+```{r duration-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(11,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(duration/60,y)
+```
+```{r campaign-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(12,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(campaign,y)
+```
+```{r pdays-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(13,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(pdays,y)
+```
+```{r previous-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(14,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(previous,y)
+```
+```{r poutcome-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(15,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(poutcome,y)
+```
+```{r emp.var.rate-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(16,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(emp.var.rate,y)
+```
+```{r cons.price.idx-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(17,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(cons.price.idx,y)
+```
+```{r cons.conf.idx-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(18,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(cons.conf.idx,y)
+```
+```{r euribor3m-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(19,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(euribor3m,y)
+```
+```{r nr.employed-y, echo=FALSE}
+pairs.panels(dataSet_train[,c(20,21)], 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE,  # show density plots
+             ellipses = TRUE # show correlation ellipses
+             )
+plot(nr.employed,y)
+```
+5 Variables más importantes con mayor correlación en valor absoluto con la variable respuesta:
+
+duration, nr.employed, pdays, euribor3m, emp.var.rate
+
 
 ```{r EDA}
 attach(dataSet_train) 
